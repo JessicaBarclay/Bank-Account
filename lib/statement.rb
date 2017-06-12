@@ -1,11 +1,12 @@
 class Statement
   def print_bank_statement(account)
-    statement = ''
-
+    print "|           date           ||        credit        ||" +
+          "        debit        ||        balance          |\n"
     account.transactions.each do | transaction |
-      statement = " #{transaction.date} || #{transaction.type == 'credit' ? transaction.amount : ''} ||" +
-                  " #{transaction.type == 'debit' ? transaction.amount : ''}      || #{transaction.balance}"
+      puts "|        #{transaction.date}        ||" +
+           "      #{transaction.type == 'credit' ? transaction.amount : '   '}           ||" +
+           "         #{transaction.type == 'debit' ? transaction.amount : '   '}           ||" +
+           "       #{transaction.balance}            |\n"
     end
-    return "       date || credit || debit || balance\n#{statement}"
   end
 end

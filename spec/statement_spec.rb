@@ -4,7 +4,8 @@ describe Statement do
   it 'pretty print account transactions' do
     account = Account.new
     account.deposit(100)
-    expect(statement.print_bank_statement(account)).to eq "       date || credit || debit || balance\n" +
-                                                          " 12/06/2017 || 100.00 ||       || 100.00"
+    account.withdraw(50)
+    expect { statement.print_bank_statement(account) }.to output.to_stdout
   end
+
 end
