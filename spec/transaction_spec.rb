@@ -3,5 +3,6 @@ describe Transaction do
   it { is_expected.to respond_to(:date) }
   it { is_expected.to respond_to(:type) }
   it { is_expected.to respond_to(:amount) }
-  it { is_expected.to respond_to(:balance_at_transaction) }
+  it { is_expected.to respond_to(:balance) }
+  it { is_expected.to respond_to(:save) }
 end

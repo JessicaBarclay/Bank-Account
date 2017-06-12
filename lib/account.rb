@@ -1,3 +1,5 @@
+require_relative 'transaction'
+
 class Account
   attr_reader :balance, :transactions
 
@@ -6,32 +8,22 @@ class Account
     @transactions = []
   end
 
-  def deposit(amount)
+  def deposit(amount, transaction = Transaction.new)
     @balance += amount
-    @transactions.push(credit_transaction(amount))
+    transaction.save(amount, @balance, 'credit')
+    @transactions.push(transaction)
   end
 
-  def withdraw(amount)
+  def withdraw(amount, transaction = Transaction.new)
     raise 'Insufficient funds' if insufficient_funds?(amount)
     @balance -= amount
-    @transactions.push(debit_transaction(amount))
+    transaction.save(amount, @balance, 'debit')
+    @transactions.push(transaction)
   end
 
   private
 
   def insufficient_funds?(amount)
     @balance < amount
-  end
-
-  def timestamp
-    Time.now.strftime('%d/%m/%Y')
-  end
-
-  def credit_transaction(amount)
-    transaction = { timestamp => ['credit', amount, @balance] }
-  end
-
-  def debit_transaction(amount)
-    transaction = { timestamp => ['debit', amount, @balance] }
   end
 end
