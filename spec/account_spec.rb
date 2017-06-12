@@ -11,7 +11,7 @@ describe Account do
     expect { account.withdraw(8) }.to change { account.balance }.by -8
   end
 
-  it 'will reject withdrawal request if balance is less than amount' do
-    expect { account.withdraw(5) }.not_to change { account.balance }
+  it 'will reject withdrawal and raise error if account has insufficient funds' do
+    expect { account.withdraw(5) }.to raise_error 'Insufficient funds'
   end
 end
