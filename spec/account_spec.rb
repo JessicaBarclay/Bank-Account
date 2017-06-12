@@ -18,14 +18,19 @@ describe Account do
   context 'make deposit and create transaction' do
     before do
       account.deposit(10)
-      @timestamp = Time.now.strftime('%d/%m/%Y')
+      @timestamp = Time.now
       allow(Time).to receive(:now).and_return(@timestamp)
     end
 
-    let(:transaction) { { @timestamp => [10, 10] } }
+    let(:transaction) { { @timestamp.strftime('%d/%m/%Y') => [10, 10] } }
 
     it 'adds deposits to transactions array with timestamp, and balance at time' do
       expect(account.transactions[0]).to eq transaction
+    end
+
+    it 'adds multiple deposit transactions' do
+      account.deposit(12.75)
+      expect(account.transactions).to eq [{"12/06/2017"=>[10, 10]}, {"12/06/2017"=>[12.75, 22.75]}]
     end
   end
 end
