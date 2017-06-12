@@ -8,6 +8,8 @@ class Account
 
   def deposit(amount)
     @balance += amount
+    transaction = { timestamp => [amount, @balance] }
+    @transactions.push(transaction)
   end
 
   def withdraw(amount)
@@ -19,5 +21,9 @@ class Account
 
   def insufficient_funds?(amount)
     @balance < amount
+  end
+
+  def timestamp
+    Time.now.strftime('%d/%m/%Y')
   end
 end
