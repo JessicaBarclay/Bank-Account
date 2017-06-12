@@ -14,6 +14,6 @@ account = Account.new
 account.deposit(12)
 statement.print_bank_statement(account)
 =>
-           "|| credit || debit || balance"
+"|| credit || debit || balance"
 "12/06/2017 || 12.00 || || 12.00"
 ```
