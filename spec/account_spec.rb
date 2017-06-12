@@ -24,13 +24,28 @@ describe Account do
 
     let(:transaction) { { @timestamp.strftime('%d/%m/%Y') => [10, 10] } }
 
-    it 'adds deposits to transactions array with timestamp, and balance at time' do
+    it 'adds deposits to transactions array with timestamp and balance after deposit' do
       expect(account.transactions[0]).to eq transaction
     end
 
     it 'adds multiple deposit transactions' do
       account.deposit(12.75)
-      expect(account.transactions).to eq [{"12/06/2017"=>[10, 10]}, {"12/06/2017"=>[12.75, 22.75]}]
+      expect(account.transactions).to eq [{@timestamp.strftime('%d/%m/%Y')=>[10, 10]},
+                                          {@timestamp.strftime('%d/%m/%Y')=>[12.75, 22.75]}]
+    end
+  end
+
+  context 'make deposit and withdrawal to create transaction' do
+    before do
+      account.deposit(275)
+      account.withdraw(24.50)
+      @timestamp = Time.now
+      allow(Time).to receive(:now).and_return(@timestamp)
+    end
+
+    it 'adds withdrawals to transactions array with timestamp and balance after withdrawal' do
+      expect(account.transactions).to eq [{@timestamp.strftime('%d/%m/%Y')=>[275, 275]},
+                                          {@timestamp.strftime('%d/%m/%Y') => [24.50, 250.50]}]
     end
   end
 end
