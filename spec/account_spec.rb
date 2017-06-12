@@ -7,6 +7,11 @@ describe Account do
   end
 
   it 'withdraw specified ammount from account balance' do
+    account.deposit(8)
     expect { account.withdraw(8) }.to change { account.balance }.by -8
+  end
+
+  it 'will reject withdrawal request if balance is less than amount' do
+    expect { account.withdraw(5) }.not_to change { account.balance }
   end
 end

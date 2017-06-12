@@ -10,7 +10,7 @@ class Account
   end
 
   def withdraw(amount)
-    @balance -= amount
+    @balance >= amount ? @balance -= amount : return
   end
 
 end
