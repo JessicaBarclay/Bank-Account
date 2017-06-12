@@ -1,5 +1,6 @@
 require './lib/account'
 require './lib/statement'
+require './lib/transaction'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
