@@ -1,6 +1,14 @@
 require './lib/account'
 require './lib/statement'
 require './lib/transaction'
+require 'simplecov'
+require 'simplecov-console'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+SimpleCov::Formatter::Console,
+SimpleCov::Formatter::HTMLFormatter
+])
+SimpleCov.start
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -10,4 +18,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.default_formatter = 'doc' if config.files_to_run.one?
+  config.order = :random
+  Kernel.srand config.seed
 end

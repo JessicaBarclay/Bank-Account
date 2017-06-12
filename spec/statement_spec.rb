@@ -7,5 +7,4 @@ describe Statement do
     account.withdraw(50)
     expect { statement.print_bank_statement(account) }.to output.to_stdout
   end
-
 end
