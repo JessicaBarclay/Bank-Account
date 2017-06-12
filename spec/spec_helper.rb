@@ -1,5 +1,5 @@
 require './lib/account'
-require './lib/print_statement'
+require './lib/statement'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
